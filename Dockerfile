@@ -1,7 +1,6 @@
-FROM centos:7
+FROM alpine:3.11
 
-RUN yum update -y
-RUN yum -y install dnsmasq
+RUN apk add --update --no-cache dnsmasq
 
 COPY dnsmasq.conf /etc/
 COPY resolv.dnsmasq.conf /etc/
