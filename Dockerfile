@@ -1,7 +1,6 @@
-FROM centos:7
+FROM debian:11
 
-RUN yum update -y
-RUN yum -y install dnsmasq
+RUN apt-get update && apt-get dist-upgrade -y && apt-get install dnsmasq -y
 
 COPY dnsmasq.conf /etc/
 COPY resolv.dnsmasq.conf /etc/
