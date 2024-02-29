@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  app:
+    build: ./docker
+    container_name: dnsmasq
+    image: ${IMAGE_NAME:-dnsmasq}
+    restart: always
+    ports:
+      - "${IP}:53:5353/udp"
+    volumes:
+      - ./volumes/config/hosts:/dnsmasq.hosts/hosts
+    logging:
+      driver: "local"
+      options:
+        max-size: "10m"
+        max-file: "5"
+        compress: "true"
+    environment:
+      - LOCAL_DNS_TTL
+
