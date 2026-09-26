@@ -1,5 +1,3 @@
-version: "3"
-
 services:
   app:
     build: ./docker
@@ -8,8 +6,10 @@ services:
     restart: always
     ports:
       - "${IP}:53:5353/udp"
+      - "${IP}:53:5353/tcp"
     volumes:
       - ./volumes/config/hosts:/dnsmasq.hosts/hosts
+      - ./volumes/logs:/logs
     logging:
       driver: "local"
       options:
@@ -18,4 +18,6 @@ services:
         compress: "true"
     environment:
       - LOCAL_DNS_TTL
+      - HOST_USER_ID
+      - HOST_GROUP_ID
 
